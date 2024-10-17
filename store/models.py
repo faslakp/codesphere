@@ -16,11 +16,11 @@ class BaseModel(models.Model):
 
 class UserProfile(BaseModel):
 
-    bio=models.CharField(max_length=200)
+    bio=models.CharField(max_length=200,null=True)
 
     profile_picture=models.ImageField(upload_to="profilepictures",null=True,blank=True)
 
-    phone=models.CharField(max_length=200)
+    phone=models.CharField(max_length=200,null=True)
 
     owner=models.OneToOneField(User,on_delete=models.CASCADE,related_name="profile")
 
@@ -77,4 +77,32 @@ class Order(BaseModel):
     is_paid=models.BooleanField(default=False)
     
     order_id=models.CharField(max_length=200,null=True)
+
+
+
+    # django.db.signals post_save,pre_save,post_init
+from django.db.models.signals import post_save
+
+def create_user_profile(sender,instance,created,**kwargs):
+
+    if created:
+
+        UserProfile.objects.create(owner=instance)
+post_save.connect(create_user_profile,sender=User)
+
+
+
+
+def create_wishlist(sender,instance,created,**kwargs):
+
+    if created:
+
+        WishList.objects.create(owner=instance)
+
+post_save.connect(create_wishlist,sender=User)
+
+
+
+
+
     
