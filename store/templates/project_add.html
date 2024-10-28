@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+
+<form action=""method="post" enctype="multipart/form-data">
+
+    {%csrf_token%}
+
+    {{form}}
+
+    <button type="submit">add project</button>
+</form>
+
+{%endblock%}

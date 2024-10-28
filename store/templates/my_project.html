@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+
+{% load embed_video_tags %}
+
+
+{%block main_block%}
+
+<div class="w-1/2 mx-auto mt-2">
+    {%for p in data%}
+    <article class="flex bg-white transition hover:shadow-xl mt-7">
+        <div class="rotate-180 p-2 [writing-mode:_vertical-lr]">
+          <time
+            datetime="2022-10-10"
+            class="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900"
+          >
+            <span>{{p.created_date|date}}</span>
+            <span class="w-px flex-1 bg-gray-900/10"></span>
+            <span>{{p.updated_date|date}}</span>
+          </time>
+        </div>
+      
+        <div class="hidden sm:block sm:basis-56">
+            {% video p.thumbnail '350x300' %}
+        </div>
+      
+        <div class="flex flex-1 flex-col justify-between">
+          <div class="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+            <a href="#">
+              <h3 class="font-bold uppercase text-gray-900">
+                {{p.title}}
+              </h3>
+            </a>
+      
+            <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+              {{p.description}}
+            </p>
+
+            <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                {%for t in p.tag_objects.all%}
+
+                #{{t.title}} |
+
+
+
+                {%endfor%}
+               </p>
+
+
+
+            <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+               $ {{p.price}}
+              </p>
+          </div>
+      
+          <div class="sm:flex sm:items-end sm:justify-end">
+            <a
+              href="{%url 'project-update' p.id%}"
+              class="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
+            >
+              change
+            </a>
+          </div>
+        </div>
+      </article>
+    {%endfor%}
+</div>
+
+{%endblock%}

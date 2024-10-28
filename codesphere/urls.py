@@ -17,10 +17,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from store import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',views.SignUpView.as_view(),name="signup"),
+    path('signin/',views.SignInView.as_view(),name="signin"),
+    path('index/',views.IndexView.as_view(),name="index"),
+    path('signout/',views.LogoutView.as_view(),name="signout"),
+    path('change/',views.UserProfileEditView.as_view(),name="profile-edit"),
+    path('project/add/',views.ProjectCreateView.as_view(),name="project-add"),
+    path('myworks/all',views.MyProjectListView.as_view(),name="my-works"),
+    path('project/<int:pk>/change/',views.ProjectUpdateView.as_view(),name="project-update"),
+    path('project/<int:pk>/details/',views.ProjectDetailView.as_view(),name="project-details"),
     
-]
+   
+
+    
+
+    
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

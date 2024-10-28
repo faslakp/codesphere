@@ -18,7 +18,7 @@ class UserProfile(BaseModel):
 
     bio=models.CharField(max_length=200,null=True)
 
-    profile_picture=models.ImageField(upload_to="profilepictures",null=True,blank=True)
+    profile_picture=models.ImageField(upload_to="profilepictures",null=True,blank=True, default="profilepictures/default.png")
 
     phone=models.CharField(max_length=200,null=True)
 
