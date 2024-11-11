@@ -33,7 +33,19 @@ urlpatterns = [
     path('myworks/all',views.MyProjectListView.as_view(),name="my-works"),
     path('project/<int:pk>/change/',views.ProjectUpdateView.as_view(),name="project-update"),
     path('project/<int:pk>/details/',views.ProjectDetailView.as_view(),name="project-details"),
+    path('project/<int:pk>/add_to_wishlist',views.AddToWishlistView.as_view(),name="wishlist"),
+    path("wishlist/all/",views.MyWishListItemListView.as_view(),name="my-wishlist"),
+    path('wishlist-item/<int:pk>/remove/',views.WishListItemDeleteView.as_view(),name="wishlist-delete"),
+    path('checkout/',views.CheckoutView.as_view(),name="checkout"),
+    path('payment/verify/',views.PaymentVerificationView.as_view(),name="verify-payment"),
+    path('orders/all/',views.MyOrdersView.as_view(),name="orders"),
+    path('password/reset/',views.PasswordResetView.as_view(),name="password-reset")
+
     
+    
+    
+
+
    
 
     

@@ -14,13 +14,11 @@ class SignUpForm(UserCreationForm):
 
         fields=["username","email","password1","password2"]
 
-
-
 class SignInForm(forms.Form):
 
-    username=forms.CharField()
+    username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control"}))
 
-    password=forms.CharField(widget=forms.PasswordInput())
+    password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control"}))
 
 
 
@@ -43,6 +41,14 @@ class ProjectForm(forms.ModelForm):
                 "preview_image",
                 "price", "files",
                 "tag_objects","thumbnail"]
+        
+
+class PasswordResetForm(forms.Form):
+    username=forms.CharField()
+    email=forms.EmailField()
+    password1=forms.CharField()
+    password2=forms.CharField()
+    
 
         
 

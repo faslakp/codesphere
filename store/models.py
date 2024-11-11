@@ -5,7 +5,7 @@ from embed_video.fields import EmbedVideoField
 class BaseModel(models.Model):
 
     created_date=models.DateTimeField(auto_now_add=True)
-
+    
     updated_date=models.DateTimeField(auto_now=True)
 
     is_active=models.BooleanField(default=True)
@@ -53,6 +53,11 @@ class Project(BaseModel):
 
     thumbnail=EmbedVideoField()
 
+    @property
+    def download(self):
+        return WishListItem.objects.filter(project_object=self,is_order_placed=True).count()
+    
+
 
 # WishList.objects.filter(owner=request.user)
 # request.user.basket
@@ -68,6 +73,10 @@ class WishListItem(BaseModel):
 
     is_order_placed=models.BooleanField(default=False)
 
+    # class Meta:
+
+    #     unique_together=("wishlist_object","project_object","is_order_placed")
+
 # WishListItems.objects.filter(wishlist_object__owner=request.user,is_order_placed=False)
 
 class Order(BaseModel):
@@ -77,6 +86,7 @@ class Order(BaseModel):
     is_paid=models.BooleanField(default=False)
     
     order_id=models.CharField(max_length=200,null=True)
+    customer=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 
 

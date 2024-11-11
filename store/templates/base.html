@@ -41,7 +41,7 @@
                   </li>
       
                   <li>
-                    <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Services </a>
+                    <a class="text-gray-500 transition hover:text-gray-500/75" href="{%url 'my-wishlist'%}"> wishlist ({{cart_item_count}})</a>
                   </li>
       
                   <li>
@@ -78,7 +78,7 @@
                       class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                       role="menuitem"
                     >
-                      My profile
+                      My profile (){{request.user}}
                     </a>
       
                     <a
@@ -146,6 +146,15 @@
         </div>
       </header>
      <!-- navbar end -->
+
+
+     {%if messages%}
+
+      {%for m in messages%}
+        {{m}}
+      {%endfor%}
+
+     {%endif%}
 
 
      {%block main_block%}
